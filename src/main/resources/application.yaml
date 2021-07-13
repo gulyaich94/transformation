@@ -1,0 +1,6 @@
+reader:
+  file:
+    folder: file
+writer:
+  file:
+    folder: file

@@ -1,0 +1,8 @@
+### Echo test request
+GET localhost:8080/transform/echo
+Accept: application/json
+
+###
+POST localhost:8080/transform/source.xlsx
+Accept: application/json
+
