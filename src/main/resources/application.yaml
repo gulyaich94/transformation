@@ -1,6 +1,18 @@
 reader:
   file:
     folder: file
+
 writer:
   file:
     folder: file
+
+excel:
+  config:
+    vent:
+      sheet: 0
+      source: 3
+      sourceType: 4
+      target: 8
+      targetType: 5
+      nullable: 6
+      transform: 7

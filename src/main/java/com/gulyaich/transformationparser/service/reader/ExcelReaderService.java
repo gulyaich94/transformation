@@ -12,8 +12,10 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.gulyaich.transformationparser.config.excel.ExcelSheetsProperties;
 import com.gulyaich.transformationparser.exception.TransformationException;
 import com.gulyaich.transformationparser.model.RawTransformationData;
 
@@ -23,11 +25,22 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ExcelReaderService implements FileReaderService {
 
+    private final ExcelSheetsProperties excelSheetsProperties;
+
+    @Value("${reader.file.folder:}")
+    private String fileFolder;
+
+    private static final String DELIMITER = "/";
+
+    public ExcelReaderService(final ExcelSheetsProperties excelSheetsProperties) {
+        this.excelSheetsProperties = excelSheetsProperties;
+    }
+
     @Override
     public List<RawTransformationData> read(final String fileName) {
         Objects.requireNonNull(fileName, "File name is null");
 
-        final String filePath = "src/main/resources/file/" + fileName;
+        final String filePath = this.getFileFolder() + DELIMITER + fileName;
 
         if (!Files.exists(Paths.get(filePath))) {
             throw new IllegalArgumentException("The file does not exist!");
@@ -42,16 +55,7 @@ public class ExcelReaderService implements FileReaderService {
                     continue;
                 }
 
-                final var rawTransformationData = RawTransformationData.builder()
-                        .source(row.getCell(3) == null ? null : row.getCell(3).getStringCellValue())
-                        .sourceType(row.getCell(4) == null ? null : row.getCell(4).getStringCellValue())
-                        .target(row.getCell(8) == null ? null : row.getCell(8).getStringCellValue())
-                        .targetType(row.getCell(5) == null ? null : row.getCell(5).getStringCellValue())
-                        .nullable(row.getCell(6) == null ? null : row.getCell(6).getBooleanCellValue())
-                        .transform(row.getCell(7) == null ? null : row.getCell(7).getStringCellValue())
-                        .build();
-
-                data.add(rawTransformationData);
+                data.add(this.getRawTransformationData(row));
             }
 
         } catch (final IOException ex) {
@@ -61,5 +65,21 @@ public class ExcelReaderService implements FileReaderService {
 
         log.debug("RawData {}", data);
         return data;
+    }
+
+    private RawTransformationData getRawTransformationData(Row row) {
+        return RawTransformationData.builder()
+                .source(row.getCell(3) == null ? null : row.getCell(3).getStringCellValue())
+                .sourceType(row.getCell(4) == null ? null : row.getCell(4).getStringCellValue())
+                .target(row.getCell(8) == null ? null : row.getCell(8).getStringCellValue())
+                .targetType(row.getCell(5) == null ? null : row.getCell(5).getStringCellValue())
+                .nullable(row.getCell(6) == null ? null : row.getCell(6).getBooleanCellValue())
+                .transform(row.getCell(7) == null ? null : row.getCell(7).getStringCellValue())
+                .build();
+    }
+
+    @Override
+    public String getFileFolder() {
+        return fileFolder;
     }
 }

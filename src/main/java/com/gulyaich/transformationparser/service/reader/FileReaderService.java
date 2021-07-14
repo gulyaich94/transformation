@@ -8,4 +8,6 @@ import com.gulyaich.transformationparser.model.RawTransformationData;
 public interface FileReaderService {
 
     List<RawTransformationData> read(String fileName);
+
+    String getFileFolder();
 }
