@@ -15,7 +15,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.gulyaich.transformationparser.config.excel.ExcelSheetsProperties;
 import com.gulyaich.transformationparser.exception.TransformationException;
 import com.gulyaich.transformationparser.model.RawTransformationData;
 
@@ -25,23 +24,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ExcelReaderService implements FileReaderService {
 
-    private final ExcelSheetsProperties excelSheetsProperties;
-
     @Value("${reader.file.folder:}")
     private String fileFolder;
 
     private static final String DELIMITER = "/";
 
-    public ExcelReaderService(final ExcelSheetsProperties excelSheetsProperties) {
-        this.excelSheetsProperties = excelSheetsProperties;
-    }
-
     @Override
     public List<RawTransformationData> read(final String fileName, final String type) {
         Objects.requireNonNull(fileName, "File name is null");
-
-        final ExcelSheetsProperties.ExcelSheetConfig config = this.getConfig(type);
-        Objects.requireNonNull(config, String.format("Reader is not configured for type %s", type));
 
         final String filePath = this.getFileFolder() + DELIMITER + fileName;
 
@@ -84,10 +74,5 @@ public class ExcelReaderService implements FileReaderService {
     @Override
     public String getFileFolder() {
         return fileFolder;
-    }
-
-    @Override
-    public ExcelSheetsProperties.ExcelSheetConfig getConfig(final String type) {
-        return excelSheetsProperties.getConfig().get(type);
     }
 }
