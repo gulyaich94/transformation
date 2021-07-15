@@ -37,8 +37,11 @@ public class ExcelReaderService implements FileReaderService {
     }
 
     @Override
-    public List<RawTransformationData> read(final String fileName) {
+    public List<RawTransformationData> read(final String fileName, final String type) {
         Objects.requireNonNull(fileName, "File name is null");
+
+        final ExcelSheetsProperties.ExcelSheetConfig config = this.getConfig(type);
+        Objects.requireNonNull(config, String.format("Reader is not configured for type %s", type));
 
         final String filePath = this.getFileFolder() + DELIMITER + fileName;
 
@@ -81,5 +84,10 @@ public class ExcelReaderService implements FileReaderService {
     @Override
     public String getFileFolder() {
         return fileFolder;
+    }
+
+    @Override
+    public ExcelSheetsProperties.ExcelSheetConfig getConfig(final String type) {
+        return excelSheetsProperties.getConfig().get(type);
     }
 }

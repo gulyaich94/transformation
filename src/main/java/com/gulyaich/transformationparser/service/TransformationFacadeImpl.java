@@ -27,8 +27,8 @@ public class TransformationFacadeImpl implements TransformationFacade {
     }
 
     @Override
-    public void doTransformation(final String fileName) {
-        final List<RawTransformationData> rawData = fileReader.read(fileName);
+    public void doTransformation(final String fileName, final String type) {
+        final List<RawTransformationData> rawData = fileReader.read(fileName, type);
         final TransformationData transformationData = transformationService.transform(rawData);
         fileWriter.write(transformationData);
     }

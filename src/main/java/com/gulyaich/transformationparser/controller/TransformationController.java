@@ -19,9 +19,9 @@ public class TransformationController {
         this.transformationFacade = transformationFacade;
     }
 
-    @PostMapping("/{fileName}")
-    public ResponseEntity<String> generate(@PathVariable final String fileName) {
-        transformationFacade.doTransformation(fileName);
+    @PostMapping("/{fileName}/{type}")
+    public ResponseEntity<String> generate(@PathVariable final String fileName, @PathVariable final String type) {
+        transformationFacade.doTransformation(fileName, type);
         return ResponseEntity.ok("Done");
     }
 
