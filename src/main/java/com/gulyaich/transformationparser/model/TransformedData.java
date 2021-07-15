@@ -7,7 +7,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class TransformationData {
+public class TransformedData {
 
     private Transformation Transformation;
 }

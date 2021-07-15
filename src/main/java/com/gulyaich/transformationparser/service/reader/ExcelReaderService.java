@@ -15,6 +15,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.gulyaich.transformationparser.config.properties.excel.ExcelFieldsConfiguration;
 import com.gulyaich.transformationparser.exception.TransformationException;
 import com.gulyaich.transformationparser.model.RawTransformationData;
 
@@ -22,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class ExcelReaderService implements FileReaderService {
+public class ExcelReaderService implements FileReaderService<ExcelFieldsConfiguration> {
 
     @Value("${reader.file.folder:}")
     private String fileFolder;
@@ -30,7 +31,7 @@ public class ExcelReaderService implements FileReaderService {
     private static final String DELIMITER = "/";
 
     @Override
-    public List<RawTransformationData> read(final String fileName, final String type) {
+    public List<RawTransformationData> read(final String fileName, final ExcelFieldsConfiguration fieldsConfiguration) {
         Objects.requireNonNull(fileName, "File name is null");
 
         final String filePath = this.getFileFolder() + DELIMITER + fileName;
@@ -48,7 +49,7 @@ public class ExcelReaderService implements FileReaderService {
                     continue;
                 }
 
-                data.add(this.getRawTransformationData(row));
+                data.add(this.getRawTransformationData(row, fieldsConfiguration));
             }
 
         } catch (final IOException ex) {
@@ -60,15 +61,24 @@ public class ExcelReaderService implements FileReaderService {
         return data;
     }
 
-    private RawTransformationData getRawTransformationData(Row row) {
+    private RawTransformationData getRawTransformationData(final Row row,
+                                                           final ExcelFieldsConfiguration fieldsConfiguration) {
         return RawTransformationData.builder()
-                .source(row.getCell(3) == null ? null : row.getCell(3).getStringCellValue())
-                .sourceType(row.getCell(4) == null ? null : row.getCell(4).getStringCellValue())
-                .target(row.getCell(8) == null ? null : row.getCell(8).getStringCellValue())
-                .targetType(row.getCell(5) == null ? null : row.getCell(5).getStringCellValue())
-                .nullable(row.getCell(6) == null ? null : row.getCell(6).getBooleanCellValue())
-                .transform(row.getCell(7) == null ? null : row.getCell(7).getStringCellValue())
+                .source(getStringValue(row, fieldsConfiguration.getSource()))
+                .sourceType(getStringValue(row, fieldsConfiguration.getSourceType()))
+                .target(getStringValue(row, fieldsConfiguration.getTarget()))
+                .targetType(getStringValue(row, fieldsConfiguration.getTargetType()))
+                .nullable(getBooleanValue(row, fieldsConfiguration.getNullable()))
+                .transform(getStringValue(row, fieldsConfiguration.getTransform()))
                 .build();
+    }
+
+    private Boolean getBooleanValue(final Row row, final int nullable) {
+        return row.getCell(nullable) == null ? null : row.getCell(nullable).getBooleanCellValue();
+    }
+
+    private String getStringValue(final Row row, final int i) {
+        return row.getCell(i) == null ? null : row.getCell(i).getStringCellValue();
     }
 
     @Override

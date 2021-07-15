@@ -12,7 +12,7 @@ import com.gulyaich.transformationparser.config.properties.BaseProperties;
 
 @ConfigurationProperties(prefix = "excel")
 @Validated
-public class ExcelProperties implements BaseProperties<ExcelFieldsConfiguration> {
+public final class ExcelProperties implements BaseProperties<ExcelFieldsConfiguration> {
 
     @NotNull(message = "config must not be null")
     private final Map<String, ExcelFieldsConfiguration> config;

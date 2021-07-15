@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.gulyaich.transformationparser.model.Mapping;
 import com.gulyaich.transformationparser.model.RawTransformationData;
 import com.gulyaich.transformationparser.model.Transformation;
-import com.gulyaich.transformationparser.model.TransformationData;
+import com.gulyaich.transformationparser.model.TransformedData;
 import com.gulyaich.transformationparser.utils.TransformationUtils;
 
 import lombok.extern.slf4j.Slf4j;
@@ -19,15 +19,15 @@ import lombok.extern.slf4j.Slf4j;
 public class TransformationServiceImpl implements TransformationService {
 
     @Override
-    public TransformationData transform(final List<RawTransformationData> rawData) {
+    public TransformedData transform(final List<RawTransformationData> rawData) {
         Objects.requireNonNull(rawData, "Data to transform should not be null");
         log.info("Raw data size: {}", rawData.size());
 
-        final TransformationData transformationData = new TransformationData();
+        final TransformedData transformedData = new TransformedData();
         final Transformation transformation = new Transformation();
         final List<Mapping> mappings = new ArrayList<>();
         transformation.setMapping(mappings);
-        transformationData.setTransformation(transformation);
+        transformedData.setTransformation(transformation);
 
         for (final RawTransformationData item : rawData) {
             final String source = TransformationUtils.getNonEmptyStringOrNull(item.getSource());
@@ -49,7 +49,7 @@ public class TransformationServiceImpl implements TransformationService {
 
             mappings.add(mapping);
         }
-        log.info("Transformed data size: {}", transformationData.getTransformation().getMapping().size());
-        return transformationData;
+        log.info("Transformed data size: {}", transformedData.getTransformation().getMapping().size());
+        return transformedData;
     }
 }

@@ -1,9 +1,12 @@
 package com.gulyaich.transformationparser.service.fieldsconfiguration;
 
 
-public interface FieldsConfigurationService {
+import com.gulyaich.transformationparser.config.properties.BaseFieldsConfiguration;
+import com.gulyaich.transformationparser.config.properties.BaseProperties;
 
-//    BaseFieldsConfiguration getConfiguration(String type);
+public interface FieldsConfigurationService<T extends BaseProperties<E>, E extends BaseFieldsConfiguration> {
 
-    void setConfiguration();
+    E getConfiguration(String type);
+
+    void setProperties(T properties);
 }

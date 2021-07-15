@@ -4,17 +4,21 @@ import java.io.File;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gulyaich.transformationparser.exception.TransformationException;
-import com.gulyaich.transformationparser.model.TransformationData;
+import com.gulyaich.transformationparser.model.TransformedData;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class YamlWriterService implements FileWriterService<TransformationData> {
+public class YamlWriterService implements FileWriterService<TransformedData> {
+
+    @Value("${writer.file.folder:}")
+    private String fileFolder;
 
     private final ObjectMapper mapper;
 
@@ -23,9 +27,9 @@ public class YamlWriterService implements FileWriterService<TransformationData> 
     }
 
     @Override
-    public void write(final TransformationData obj) {
+    public void write(final TransformedData obj) {
         try {
-            final File file = new File("src/main/resources/file/result.yaml");
+            final File file = new File(getFileFolder() + "/result.yaml");
             if (!file.exists()) {
                 file.createNewFile();
             }
@@ -34,5 +38,10 @@ public class YamlWriterService implements FileWriterService<TransformationData> 
             log.error("Can not write object {} to yaml", obj, ex);
             throw new TransformationException("Can't read data", ex);
         }
+    }
+
+    @Override
+    public String getFileFolder() {
+        return fileFolder;
     }
 }

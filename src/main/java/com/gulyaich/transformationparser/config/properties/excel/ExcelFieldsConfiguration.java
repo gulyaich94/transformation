@@ -8,10 +8,12 @@ import com.gulyaich.transformationparser.config.properties.BaseFieldsConfigurati
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
 @Validated
 @AllArgsConstructor
+@ToString
 public final class ExcelFieldsConfiguration implements BaseFieldsConfiguration {
     @NotNull(message = "sheet number must not be null")
     private final Integer sheet;
