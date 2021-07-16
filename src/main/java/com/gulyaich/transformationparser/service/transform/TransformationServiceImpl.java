@@ -21,7 +21,6 @@ public class TransformationServiceImpl implements TransformationService {
     @Override
     public TransformedData transform(final List<RawTransformationData> rawData) {
         Objects.requireNonNull(rawData, "Data to transform should not be null");
-        log.info("Raw data size: {}", rawData.size());
 
         final TransformedData transformedData = new TransformedData();
         final Transformation transformation = new Transformation();
@@ -49,7 +48,7 @@ public class TransformationServiceImpl implements TransformationService {
 
             mappings.add(mapping);
         }
-        log.info("Transformed data size: {}", transformedData.getTransformation().getMapping().size());
+
         return transformedData;
     }
 }

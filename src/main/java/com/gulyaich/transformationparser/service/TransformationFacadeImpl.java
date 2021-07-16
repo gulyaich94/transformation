@@ -24,7 +24,7 @@ public class TransformationFacadeImpl implements TransformationFacade {
     private final TransformationService transformationService;
     private final FieldsConfigurationService fieldsConfigurationService;
 
-    public TransformationFacadeImpl(final FileReaderService fileReader,
+    public TransformationFacadeImpl(@Qualifier("excelReaderService") final FileReaderService fileReader,
                                     @Qualifier("yamlWriterService") final FileWriterService fileWriter,
                                     final TransformationService transformationService,
                                     @Qualifier("excelFieldsConfigurationService")
@@ -38,14 +38,8 @@ public class TransformationFacadeImpl implements TransformationFacade {
     @Override
     public void doTransformation(final String fileName, final String type) {
         final BaseFieldsConfiguration fieldsConfiguration = fieldsConfigurationService.getConfiguration(type);
-        log.info("fieldsConfiguration " + fieldsConfiguration);
-
         final List<RawTransformationData> rawData = fileReader.read(fileName, fieldsConfiguration);
-        log.info("rawData " + rawData);
-
         final TransformedData transformedData = transformationService.transform(rawData);
-        log.info("transformationData " + transformedData);
-
         fileWriter.write(transformedData);
     }
 }

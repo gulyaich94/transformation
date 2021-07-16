@@ -1,7 +1,6 @@
 package com.gulyaich.transformationparser.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,14 +18,9 @@ public class TransformationController {
         this.transformationFacade = transformationFacade;
     }
 
-    @PostMapping("/{fileName}/{type}")
-    public ResponseEntity<String> generate(@PathVariable final String fileName, @PathVariable final String type) {
+    @PostMapping("/{type}/{fileName}")
+    public ResponseEntity<String> generate(@PathVariable final String type, @PathVariable final String fileName) {
         transformationFacade.doTransformation(fileName, type);
         return ResponseEntity.ok("Done");
-    }
-
-    @GetMapping("/echo")
-    public ResponseEntity<String> echo() {
-        return ResponseEntity.ok("I hear you");
     }
 }
