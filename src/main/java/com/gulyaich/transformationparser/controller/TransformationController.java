@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gulyaich.transformationparser.model.TransformationResult;
 import com.gulyaich.transformationparser.service.TransformationFacade;
 
 @RestController
@@ -19,8 +20,9 @@ public class TransformationController {
     }
 
     @PostMapping("/{type}/{fileName}")
-    public ResponseEntity<String> generate(@PathVariable final String type, @PathVariable final String fileName) {
-        transformationFacade.doTransformation(fileName, type);
-        return ResponseEntity.ok("Done");
+    public ResponseEntity<TransformationResult> generate(@PathVariable final String type,
+                                                         @PathVariable final String fileName) {
+        final TransformationResult result = transformationFacade.doTransformation(fileName, type);
+        return ResponseEntity.ok(result);
     }
 }

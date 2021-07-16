@@ -1,6 +1,8 @@
 package com.gulyaich.transformationparser.service;
 
+import com.gulyaich.transformationparser.model.TransformationResult;
+
 public interface TransformationFacade {
 
-    void doTransformation(String fileName, String type);
+    TransformationResult doTransformation(String fileName, String type);
 }
