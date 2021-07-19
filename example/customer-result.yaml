@@ -1,0 +1,23 @@
+Transformation:
+  Mapping:
+    - Source: first_name
+      SourceType: string
+      Target: name
+      TargetType: string
+      Nullable: false
+    - Source: last_name
+      SourceType: string
+      Target: surename
+      TargetType: string
+    - Source: age
+      SourceType: int
+      Target: age
+      TargetType: int
+    - Source: customer_type
+      SourceType: string
+      Target: type
+      TargetType: type
+      Nullable: false
+      Transform:
+        - "prefix"
+        -   - "type"
