@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.gulyaich.transformationparser.model.target.annotations.QuotedValue;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -32,6 +33,7 @@ public class Mapping {
     @JsonProperty("Nullable")
     private Boolean nullable;
 
+    @QuotedValue
     @JsonProperty("Transform")
     private List<Object> transform;
 }
