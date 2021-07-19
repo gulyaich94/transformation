@@ -1,5 +1,7 @@
 package com.gulyaich.transformationparser.model.target;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,5 +11,6 @@ import lombok.ToString;
 @ToString
 public class TransformedData {
 
+    @JsonProperty("Transformation")
     private Transformation transformation;
 }
