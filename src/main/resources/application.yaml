@@ -1,10 +1,10 @@
 reader:
   file:
-    folder: file
+    folderPath: file/
 
 writer:
   file:
-    folder: file
+    folderPath: file/
 
 excel:
   config:

@@ -45,7 +45,7 @@ public class TransformationFacadeImpl implements TransformationFacade {
         final BaseFieldsConfiguration fieldsConfiguration = fieldsConfigurationService.getConfiguration(type);
         final List<RawTransformationData> rawData = fileReader.read(fileName, fieldsConfiguration);
         final TransformedData transformedData = transformationService.transform(rawData);
-        fileWriter.write(transformedData);
+        fileWriter.write(transformedData, type);
         return transformationResultService.getResults(rawData, transformedData);
     }
 }

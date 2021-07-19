@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public interface FileWriterService<T> {
 
-    void write(T obj);
+    void write(T obj, String prefix);
 
     String getFileFolder();
 

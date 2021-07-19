@@ -3,6 +3,7 @@ package com.gulyaich.transformationparser.service.writer;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,15 +19,17 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class YamlWriterService implements FileWriterService<TransformedData> {
 
-    @Value("${writer.file.folder:}")
+    @Value("${writer.file.folderPath:}")
     private String fileFolder;
 
     private ObjectMapper mapper;
 
     @Override
-    public void write(final TransformedData obj) {
+    public void write(final TransformedData obj, final String prefix) {
         try {
-            final File file = new File(getFileFolder() + "/result.yaml");
+            final String filePath =
+                    String.format("%s%s-result.yaml", this.getFileFolder(), StringUtils.lowerCase(prefix));
+            final File file = new File(filePath);
             if (!file.exists()) {
                 file.createNewFile();
             }

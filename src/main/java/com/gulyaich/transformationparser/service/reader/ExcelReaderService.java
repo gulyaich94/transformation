@@ -25,16 +25,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ExcelReaderService implements FileReaderService<ExcelFieldsConfiguration> {
 
-    @Value("${reader.file.folder:}")
+    @Value("${reader.file.folderPath:}")
     private String fileFolder;
-
-    private static final String DELIMITER = "/";
 
     @Override
     public List<RawTransformationData> read(final String fileName, final ExcelFieldsConfiguration fieldsConfiguration) {
         Objects.requireNonNull(fileName, "File name is null");
 
-        final String filePath = this.getFileFolder() + DELIMITER + fileName;
+        final String filePath = String.format("%s%s", this.getFileFolder(), fileName);
 
         if (!Files.exists(Paths.get(filePath))) {
             throw new IllegalArgumentException("The file does not exist!");
