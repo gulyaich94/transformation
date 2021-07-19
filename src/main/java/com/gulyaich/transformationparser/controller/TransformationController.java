@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gulyaich.transformationparser.model.TransformationResult;
+import com.gulyaich.transformationparser.model.result.TransformationResult;
 import com.gulyaich.transformationparser.service.TransformationFacade;
 
 @RestController

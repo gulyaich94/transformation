@@ -1,6 +1,6 @@
 package com.gulyaich.transformationparser.service;
 
-import com.gulyaich.transformationparser.model.TransformationResult;
+import com.gulyaich.transformationparser.model.result.TransformationResult;
 
 public interface TransformationFacade {
 

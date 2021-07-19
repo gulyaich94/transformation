@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.gulyaich.transformationparser.config.properties.BaseFieldsConfiguration;
-import com.gulyaich.transformationparser.model.RawTransformationData;
-import com.gulyaich.transformationparser.model.TransformationResult;
-import com.gulyaich.transformationparser.model.TransformedData;
+import com.gulyaich.transformationparser.model.raw.RawTransformationData;
+import com.gulyaich.transformationparser.model.result.TransformationResult;
+import com.gulyaich.transformationparser.model.target.TransformedData;
 import com.gulyaich.transformationparser.service.fieldsconfiguration.FieldsConfigurationService;
 import com.gulyaich.transformationparser.service.reader.FileReaderService;
 import com.gulyaich.transformationparser.service.transform.TransformationService;

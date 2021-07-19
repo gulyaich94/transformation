@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gulyaich.transformationparser.exception.TransformationException;
-import com.gulyaich.transformationparser.model.TransformedData;
+import com.gulyaich.transformationparser.model.target.TransformedData;
 
 import lombok.extern.slf4j.Slf4j;
 

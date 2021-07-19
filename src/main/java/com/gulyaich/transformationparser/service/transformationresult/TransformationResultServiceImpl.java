@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.gulyaich.transformationparser.model.Mapping;
-import com.gulyaich.transformationparser.model.RawTransformationData;
-import com.gulyaich.transformationparser.model.TransformationResult;
-import com.gulyaich.transformationparser.model.TransformedData;
+import com.gulyaich.transformationparser.model.target.Mapping;
+import com.gulyaich.transformationparser.model.raw.RawTransformationData;
+import com.gulyaich.transformationparser.model.result.TransformationResult;
+import com.gulyaich.transformationparser.model.target.TransformedData;
 
 @Service
 public class TransformationResultServiceImpl implements TransformationResultService {

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.gulyaich.transformationparser.config.properties.excel.ExcelFieldsConfiguration;
 import com.gulyaich.transformationparser.exception.TransformationException;
-import com.gulyaich.transformationparser.model.RawTransformationData;
+import com.gulyaich.transformationparser.model.raw.RawTransformationData;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -69,7 +69,8 @@ public class ExcelReaderService implements FileReaderService<ExcelFieldsConfigur
                 .target(getStringValue(row, fieldsConfiguration.getTarget()))
                 .targetType(getStringValue(row, fieldsConfiguration.getTargetType()))
                 .nullable(getBooleanValue(row, fieldsConfiguration.getNullable()))
-                .transform(getStringValue(row, fieldsConfiguration.getTransform()))
+                .transformType(getStringValue(row, fieldsConfiguration.getTransformType()))
+                .transformValue(getStringValue(row, fieldsConfiguration.getTransformValue()))
                 .build();
     }
 

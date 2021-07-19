@@ -27,6 +27,8 @@ public final class ExcelFieldsConfiguration implements BaseFieldsConfiguration {
     private final Integer targetType;
     @NotNull(message = "nullable number must not be null")
     private final Integer nullable;
-    @NotNull(message = "transform number must not be null")
-    private final Integer transform;
+    @NotNull(message = "transformType number must not be null")
+    private final Integer transformType;
+    @NotNull(message = "transformValue number must not be null")
+    private final Integer transformValue;
 }

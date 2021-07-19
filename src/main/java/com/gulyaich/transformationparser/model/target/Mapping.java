@@ -1,4 +1,6 @@
-package com.gulyaich.transformationparser.model;
+package com.gulyaich.transformationparser.model.target;
+
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -19,5 +21,5 @@ public class Mapping {
     private String target;
     private String targetType;
     private Boolean nullable;
-    private String transform;
+    private List<Object> transform;
 }

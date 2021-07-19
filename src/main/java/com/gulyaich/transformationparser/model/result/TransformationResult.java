@@ -1,4 +1,4 @@
-package com.gulyaich.transformationparser.model;
+package com.gulyaich.transformationparser.model.result;
 
 import java.util.List;
 

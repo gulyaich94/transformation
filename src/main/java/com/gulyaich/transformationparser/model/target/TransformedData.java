@@ -1,4 +1,4 @@
-package com.gulyaich.transformationparser.model;
+package com.gulyaich.transformationparser.model.target;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,5 +9,5 @@ import lombok.ToString;
 @ToString
 public class TransformedData {
 
-    private Transformation Transformation;
+    private Transformation transformation;
 }

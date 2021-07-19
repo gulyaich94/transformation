@@ -1,4 +1,4 @@
-package com.gulyaich.transformationparser.model;
+package com.gulyaich.transformationparser.model.target;
 
 import java.util.List;
 
@@ -11,5 +11,5 @@ import lombok.ToString;
 @ToString
 public class Transformation {
 
-    private List<Mapping> Mapping;
+    private List<Mapping> mapping;
 }

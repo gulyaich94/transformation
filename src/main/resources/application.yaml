@@ -12,7 +12,8 @@ excel:
       sheet: 0
       source: 3
       sourceType: 4
-      target: 8
+      target: 9
       targetType: 5
       nullable: 6
-      transform: 7
+      transformType: 7
+      transformValue: 8

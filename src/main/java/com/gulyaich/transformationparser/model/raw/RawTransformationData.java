@@ -1,4 +1,4 @@
-package com.gulyaich.transformationparser.model;
+package com.gulyaich.transformationparser.model.raw;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -14,5 +14,6 @@ public class RawTransformationData {
     private String target;
     private String targetType;
     private Boolean nullable;
-    private String transform;
+    private String transformType;
+    private String transformValue;
 }
