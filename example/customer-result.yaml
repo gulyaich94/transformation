@@ -20,4 +20,4 @@ Transformation:
       Nullable: false
       Transform:
         - "prefix"
-        -   - "type"
+        -   - "type_"

@@ -1,7 +1,8 @@
-m### Example ###
+### Example ###
 POST localhost:8080/transform/customer/example.xlsx
 Accept: application/json
 
 ### Add your request here ###
 POST localhost:8080/transform/{{type}}/{{sourceFile}}
 Accept: application/json
+
