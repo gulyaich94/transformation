@@ -1,8 +1,8 @@
-# Excel to yaml transformation for ETLite
+# Excel to yaml transformation
 
 ## Overview
 
-This application can help you to generate ETLite transformation files parsed from Excel files.
+This application can help you to generate transformation files parsed from Excel files.
 
 ## Settings
 
