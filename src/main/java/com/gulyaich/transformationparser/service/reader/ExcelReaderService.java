@@ -38,10 +38,11 @@ public class ExcelReaderService implements FileReaderService<ExcelFieldsConfigur
             throw new IllegalArgumentException("The file does not exist!");
         }
 
+        final int sheetNumber = fieldsConfiguration.getSheet();
         final List<RawTransformationData> data = new ArrayList<>();
         try (final FileInputStream file = new FileInputStream(filePath);
              final Workbook workbook = new XSSFWorkbook(file)) {
-            final Sheet sheet = workbook.getSheetAt(0);
+            final Sheet sheet = workbook.getSheetAt(sheetNumber);
             for (final Row row : sheet) {
                 if (row.getRowNum() == 0) {
                     continue;
