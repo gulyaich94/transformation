@@ -19,16 +19,21 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class YamlWriterService implements FileWriterService<TransformedData> {
 
-    @Value("${writer.file.folderPath:}")
-    private String fileFolder;
+    private final String fileFolder;
+    private final ObjectMapper mapper;
 
-    private ObjectMapper mapper;
+    @Autowired
+    public YamlWriterService(@Value("${writer.file.folderPath:}") final String fileFolder,
+                             @Qualifier("yamlObjectMapper") final ObjectMapper mapper) {
+        this.fileFolder = fileFolder;
+        this.mapper = mapper;
+    }
 
     @Override
     public void write(final TransformedData obj, final String prefix) {
         try {
             final String filePath =
-                    String.format("%s%s-result.yaml", this.getFileFolder(), StringUtils.lowerCase(prefix));
+                    String.format("%s%s-result.yaml", fileFolder, StringUtils.lowerCase(prefix));
             final File file = new File(filePath);
             if (!file.exists()) {
                 file.createNewFile();
@@ -38,17 +43,5 @@ public class YamlWriterService implements FileWriterService<TransformedData> {
             log.error("Can not write object {} to yaml", obj, ex);
             throw new TransformationException("Can't read data", ex);
         }
-    }
-
-    @Override
-    public String getFileFolder() {
-        return fileFolder;
-    }
-
-    @Override
-    @Autowired
-    @Qualifier("yamlObjectMapper")
-    public void setMapper(final ObjectMapper mapper) {
-        this.mapper = mapper;
     }
 }

@@ -9,6 +9,4 @@ import com.gulyaich.transformationparser.model.raw.RawTransformationData;
 public interface FileReaderService<T extends BaseFieldsConfiguration> {
 
     List<RawTransformationData> read(String fileName, T fieldsConfiguration);
-
-    String getFileFolder();
 }

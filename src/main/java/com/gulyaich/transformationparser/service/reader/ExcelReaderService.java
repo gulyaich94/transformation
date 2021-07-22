@@ -12,6 +12,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -25,14 +26,18 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ExcelReaderService implements FileReaderService<ExcelFieldsConfiguration> {
 
-    @Value("${reader.file.folderPath:}")
-    private String fileFolder;
+    private final String fileFolder;
+
+    @Autowired
+    public ExcelReaderService(@Value("${reader.file.folderPath:}") final String fileFolder) {
+        this.fileFolder = fileFolder;
+    }
 
     @Override
     public List<RawTransformationData> read(final String fileName, final ExcelFieldsConfiguration fieldsConfiguration) {
         Objects.requireNonNull(fileName, "File name is null");
 
-        final String filePath = String.format("%s%s", this.getFileFolder(), fileName);
+        final String filePath = String.format("%s%s", fileFolder, fileName);
 
         if (!Files.exists(Paths.get(filePath))) {
             throw new IllegalArgumentException("The file does not exist!");
@@ -79,10 +84,5 @@ public class ExcelReaderService implements FileReaderService<ExcelFieldsConfigur
 
     private String getStringValue(final Row row, final int i) {
         return row.getCell(i) == null ? null : row.getCell(i).getStringCellValue();
-    }
-
-    @Override
-    public String getFileFolder() {
-        return fileFolder;
     }
 }
