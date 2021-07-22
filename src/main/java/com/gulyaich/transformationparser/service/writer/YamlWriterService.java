@@ -41,7 +41,7 @@ public class YamlWriterService implements FileWriterService<TransformedData> {
             mapper.writeValue(file, obj);
         } catch (IOException ex) {
             log.error("Can not write object {} to yaml", obj, ex);
-            throw new TransformationException("Can't read data", ex);
+            throw new TransformationException("Can not write object {} to yaml", ex);
         }
     }
 }
