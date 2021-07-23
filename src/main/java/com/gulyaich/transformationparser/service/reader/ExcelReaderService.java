@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import com.gulyaich.transformationparser.config.properties.excel.ExcelFieldsConfiguration;
 import com.gulyaich.transformationparser.exception.TransformationException;
 import com.gulyaich.transformationparser.model.raw.RawTransformationData;
+import com.gulyaich.transformationparser.utils.ExcelUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,6 +37,7 @@ public class ExcelReaderService implements FileReaderService<ExcelFieldsConfigur
     @Override
     public List<RawTransformationData> read(final String fileName, final ExcelFieldsConfiguration fieldsConfiguration) {
         Objects.requireNonNull(fileName, "File name is null");
+        Objects.requireNonNull(fieldsConfiguration, "Fields configuration is null");
 
         final String filePath = String.format("%s%s", fileFolder, fileName);
 
@@ -49,7 +51,7 @@ public class ExcelReaderService implements FileReaderService<ExcelFieldsConfigur
              final Workbook workbook = new XSSFWorkbook(file)) {
             final Sheet sheet = workbook.getSheetAt(sheetNumber);
             for (final Row row : sheet) {
-                if (row.getRowNum() == 0) {
+                if (row.getRowNum() == 0 || ExcelUtils.isRowEmpty(row)) {
                     continue;
                 }
 

@@ -7,6 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import com.gulyaich.transformationparser.config.properties.BaseFieldsConfiguration;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -14,6 +15,7 @@ import lombok.ToString;
 @Validated
 @AllArgsConstructor
 @ToString
+@Builder
 public final class ExcelFieldsConfiguration implements BaseFieldsConfiguration {
     @NotNull(message = "sheet number must not be null")
     private final Integer sheet;

@@ -80,7 +80,6 @@ class TransformationServiceTest {
                         NullPointerException.class,
                         () -> transformationService.transform(rawDataList));
 
-        // then
         assertThat(
                 "NullPointerException has (Data should not be null) message",
                 expectedException.getMessage(),
