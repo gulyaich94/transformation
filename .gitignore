@@ -33,4 +33,5 @@ build/
 .vscode/
 
 ### Files folder ###
-file
+/file
+/src/test/resources/file/result

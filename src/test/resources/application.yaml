@@ -1,0 +1,29 @@
+reader:
+  file:
+    folderPath: src/test/resources/file/
+
+writer:
+  file:
+    folderPath: src/test/resources/file/result/
+
+excel:
+  config:
+    customer:
+      sheet: 0
+      source: 0
+      sourceType: 1
+      target: 2
+      targetType: 3
+      nullable: 4
+      transformType: 5
+      transformValue: 6
+
+      reseller:
+        sheet: 1
+        source: 0
+        sourceType: 1
+        target: 2
+        targetType: 3
+        nullable: 4
+        transformType: 5
+        transformValue: 6
