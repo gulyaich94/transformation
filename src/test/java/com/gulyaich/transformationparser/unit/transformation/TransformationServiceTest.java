@@ -73,7 +73,6 @@ class TransformationServiceTest {
     @Test
     void transform_throwNullIfDataIsNull_expectedNPE() {
         final List<RawTransformationData> rawDataList = null;
-        final String errorMsg = "Data to transform should not be null";
 
         var expectedException =
                 assertThrows(
@@ -83,6 +82,6 @@ class TransformationServiceTest {
         assertThat(
                 "NullPointerException has (Data should not be null) message",
                 expectedException.getMessage(),
-                equalTo(errorMsg));
+                equalTo("Data to transform should not be null"));
     }
 }

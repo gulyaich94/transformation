@@ -63,7 +63,6 @@ class ExcelReaderServiceTest {
     void read_passedNullConfig_expectNPE() {
         final String fileName = "test.xlsx";
         final ExcelFieldsConfiguration excelFieldsConfiguration = null;
-        final String errorMsg = "Fields configuration is null";
 
         var expectedException =
                 assertThrows(
@@ -73,7 +72,7 @@ class ExcelReaderServiceTest {
         assertThat(
                 "NullPointerException has (Fields configuration should not be null) message",
                 expectedException.getMessage(),
-                equalTo(errorMsg));
+                equalTo("Fields configuration is null"));
     }
 
     private static ExcelFieldsConfiguration createConfig() {
