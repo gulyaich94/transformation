@@ -20,8 +20,8 @@ public class TransformationController {
     }
 
     @PostMapping("/{type}/{fileName}")
-    public ResponseEntity<TransformationResult> generate(@PathVariable final String type,
-                                                         @PathVariable final String fileName) {
+    public ResponseEntity<TransformationResult> transform(@PathVariable final String type,
+                                                          @PathVariable final String fileName) {
         final TransformationResult result = transformationFacade.doTransformation(fileName, type);
         return ResponseEntity.ok(result);
     }
